@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask CRUD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Flask CRUD</h1>
+
+    <form action="/add" method="POST">
+        <input type="text" name="nom" placeholder="Nom" required>
+        <input type="text" name="prenom" placeholder="Prénom" required>
+        <select name="sexe" required>
+            <option value="">Sexe</option>
+            <option value="Masculin">Masculin</option>
+            <option value="Féminin">Féminin</option>
+        </select>
+
+        <select name="option" required>
+            <option value="">Option</option>
+            <option value="Data Science">Data Science</option>
+            <option value="Full Stack">Full Stack</option>
+            <option value="Ux Design">Ux Design</option>
+        </select>
+
+        
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>Sexe</th>
+            <th>Option</th>
+            <th>Action</th>
+        </tr>
+        {% for e in etudiants %}
+        <tr>
+            <td>{{ e.id }}</td>
+            <td>{{ e.nom }}</td>
+            <td>{{ e.prenom }}</td>
+            <td>{{ e.sexe }}</td>
+            <td>{{ e.option }}</td>
+            <td>
+                <a href="/update/{{ e.id }}">Modifier</a> |
+                <a href="/delete/{{ e.id }}">Supprimer</a>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

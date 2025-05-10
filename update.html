@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier un étudiant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Modifier l'étudiant {{ etudiant.id }}</h1>
+
+    <form action="/update/{{ etudiant.id }}" method="POST">
+        <input type="text" name="nom" value="{{ etudiant.nom }}" required>
+        <input type="text" name="prenom" value="{{ etudiant.prenom }}" required>
+        <select name="sexe" required>
+            <option value="Masculin" {% if etudiant.sexe == "Masculin" %}selected{% endif %}>Masculin</option>
+            <option value="Féminin" {% if etudiant.sexe == "Féminin" %}selected{% endif %}>Féminin</option>
+        </select>
+        <input type="text" name="option" value="{{ etudiant.option }}" required>
+        <button type="submit">Mettre à jour</button>
+    </form>
+    <br>
+    <a href="/">← Retour à l'accueil</a>
+</body>
+</html>
