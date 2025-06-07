@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: 'Redressed', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .charts-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin: 40px;
+        }
+
+        .plotly-graph-div {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+
+    <div class="charts-container">
+        <div>{{ graph1|safe }}</div>
+        <div>{{ graph2|safe }}</div>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{{ url_for('export_excel') }}">
+            <button style="padding: 10px 20px; background-color: #2980b9; color: white; border: none; border-radius: 8px;">📥 Exporter Excel</button>
+        </a>
+        <a href="{{ url_for('export_pdf') }}">
+            <button style="padding: 10px 20px; background-color: #c0392b; color: white; border: none; border-radius: 8px; margin-left: 10px;">📄 Exporter PDF</button>
+        </a>
+    </div>
+</body>
+</html>
