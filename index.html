@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Flask CRUD</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="style.css ">
 </head>
 <body>
+    <h1>Akieni Academy</h1>
     <h1>Flask CRUD</h1>
 
     <form action="/add" method="POST">
@@ -27,6 +27,8 @@
 
         
         <button type="submit">Ajouter</button>
+        <a href="{{ url_for('dashboard') }}" style="display: inline-block; padding: 10px 20px; background-color: #3498db; color: white; text-decoration: none; border-radius: 8px; margin: 20px; font-family: 'Redressed', cursive;">Voir le Tableau de Bord</a>
+
     </form>
 
     <table>
