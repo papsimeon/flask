@@ -8,6 +8,9 @@ from xhtml2pdf import pisa
 from flask import Flask, render_template, request, redirect, url_for
 import plotly.graph_objects as go
 from collections import Counter
+from flask import render_template
+import plotly.graph_objs as go
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///etudiants.db'
@@ -63,10 +66,10 @@ def delete(id):
     db.session.commit()
     return redirect('/')
 
-# Creation de la route du dashboard
+
+
 @app.route('/dashboard')
 def dashboard():
-    from collections import Counter
     data = Etudiant.query.all()
 
     option_count = Counter([e.option for e in data])
@@ -76,13 +79,13 @@ def dashboard():
     fig1 = go.Figure(data=[go.Pie(
         labels=list(option_count.keys()),
         values=list(option_count.values()),
-        textinfo='value',  # <-- Affiche uniquement le total
+        textinfo='value',  # uniquement le total
         insidetextorientation='radial',
         marker=dict(line=dict(color='#000000', width=1))
     )])
     fig1.update_layout(
         title_text='Répartition par filière',
-        height=320,  # <-- Taille agrandie légèrement
+        height=350,
         width=450
     )
 
@@ -96,9 +99,19 @@ def dashboard():
     )])
     fig2.update_layout(
         title_text='Répartition par sexe',
-        height=320,
+        height=350,
         width=450
     )
+
+    graph1_html = fig1.to_html(full_html=False)
+    graph2_html = fig2.to_html(full_html=False)
+    total_etudiants = len(data)
+
+    return render_template("dashboard.html",
+                           graph1=graph1_html,
+                           graph2=graph2_html,
+                           total_etudiants=total_etudiants)
+
 
     return render_template(
         "dashboard.html",
